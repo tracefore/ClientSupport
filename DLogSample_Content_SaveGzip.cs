@@ -1,6 +1,6 @@
 	// Prepare content
-	string query = "<QueryXml>Sample Query</<QueryXml>>";
-	string reply = "<ReplyXml>Sample Reply</<ReplyXml>>";
+	string query = "<QueryXml>Sample Query</<QueryXml>";
+	string reply = "<ReplyXml>Sample Reply</<ReplyXml>";
 
 	// Prepare token and ID
 	string token = Guid.NewGuid().ToString();
@@ -16,10 +16,13 @@
 	string path = log.FullPath(token, sessionId, seqnum, servicename);
 
 	// Save Query
-	DLogManager.Save(path, query);
+	DLogManager.SaveGzip(path, query);
 
-	// Save Reply
+	// Prepare path and service
 	servicename = DLogManager.GetServiceName(reply);
 	path = log.FullPath(token, sessionId, seqnum, servicename);
 
-	DLogManager.Save(path, reply);
+	// Save Reply
+	DLogManager.SaveGzip(path, reply);
+	
+	
