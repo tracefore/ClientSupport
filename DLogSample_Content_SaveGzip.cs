@@ -1,28 +1,40 @@
-	// Prepare content
-	string query = "<QueryXml>Sample Query</<QueryXml>";
-	string reply = "<ReplyXml>Sample Reply</<ReplyXml>";
+using System;
+using System.Collections.Generic;
+using System.IO;
+using tracefore.client.logging;
 
-	// Prepare token and ID
-	string token = Guid.NewGuid().ToString();
-	string sessionId = "123456789";
-	string seqnum = "1";
+public class DLogSample_Content_SaveGzip
+{
+	public void Sample()
+	{
+		// Prepare content
+		string query = "<QueryXml>Sample Query</<QueryXml>";
+		string reply = "<ReplyXml>Sample Reply</<ReplyXml>";
 
-	// Dlog
-	DLogManager log = new DLogManager();
-	log.TargetFolder = "your/target/path";
+		// Prepare token and ID
+		string token = Guid.NewGuid().ToString();
+		string sessionId = "123456789";
+		string seqnum = "1";
 
-	// Prepare path and service
-	string servicename = DLogManager.GetServiceName(query);
-	string path = log.FullPath(token, sessionId, seqnum, servicename);
+		// Dlog
+		DLogManager log = new DLogManager();
+		log.TargetFolder = "your/target/path";
 
-	// Save Query
-	DLogManager.SaveGzip(path, query);
+		// Prepare path and service
+		string servicename = DLogManager.GetServiceName(query);
+		string path = log.FullPath(token, sessionId, seqnum, servicename);
 
-	// Prepare path and service
-	servicename = DLogManager.GetServiceName(reply);
-	path = log.FullPath(token, sessionId, seqnum, servicename);
+		// Save Query
+		DLogManager.SaveGzip(path, query);
 
-	// Save Reply
-	DLogManager.SaveGzip(path, reply);
+		// Prepare path and service
+		servicename = DLogManager.GetServiceName(reply);
+		path = log.FullPath(token, sessionId, seqnum, servicename);
+
+		// Save Reply
+		DLogManager.SaveGzip(path, reply);
+	}
+}
+
 	
 	
